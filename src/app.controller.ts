@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Client } from './client.entity';
 
 @Controller('app')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get('hello')
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(): Promise<Client> {
+    return this.appService.createClient('Jack');
   }
 }
