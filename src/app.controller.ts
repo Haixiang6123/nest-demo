@@ -8,6 +8,6 @@ export class AppController {
 
   @Get('hello')
   getHello(): Promise<Client> {
-    return this.appService.createClient('Jack');
+    return this.appService.findOneById(1);
   }
 }

@@ -9,13 +9,17 @@ export class AppService {
     @InjectRepository(Client) private clientsRepository: Repository<Client>,
   ) {}
 
-  getAll(): Promise<Client[]> {
-    return this.clientsRepository.find(); // select * from client
+  findAll(): Promise<Client[]> {
+    return this.clientsRepository.find({
+      relations: ['pets'],
+    }); // select * from client join pets
   }
 
   async findOneById(id: number): Promise<Client> {
     try {
-      return this.clientsRepository.findOneOrFail(id); // select * from client where id == id
+      return this.clientsRepository.findOneOrFail(id, {
+        relations: ['pets'],
+      }); // select * from client where id == id
     } catch (err) {
       // Handle error
       throw err;
